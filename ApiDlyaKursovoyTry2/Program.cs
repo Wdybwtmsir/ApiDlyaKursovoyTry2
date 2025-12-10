@@ -16,6 +16,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<NormalnayaKursovayaContext>(opt => opt.UseSqlServer(connectionString)).AddTransient<ArchiveService, ArchiveService>();
 builder.Services.AddScoped<ArchiveService, ArchiveService>();
 builder.Services.AddScoped<ClientService, ClientService>();
+builder.Services.AddScoped<NumbersOtherService, NumbersOtherService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

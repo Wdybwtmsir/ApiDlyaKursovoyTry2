@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace ApiDlyaKursovoyTry2.Models;
+namespace KursClient.Models;
 
 public partial class Archive
 {
@@ -27,6 +27,4 @@ public partial class Archive
     public string? HomeAddress { get; set; }
 
     public int IdClient { get; set; }
-    [JsonIgnore]
-    public virtual Client? IdClientNavigation { get; set; }
 }

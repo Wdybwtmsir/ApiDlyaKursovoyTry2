@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace ApiDlyaKursovoyTry2.Models;
+namespace KursClient.Models;
 
 public partial class NumbersLuxeAndPoluLuxe
 {

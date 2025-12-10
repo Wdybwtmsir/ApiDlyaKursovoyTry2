@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace ApiDlyaKursovoyTry2.Models;
+namespace KursClient.Models;
 
 public partial class NumbersOther
 {
@@ -23,6 +23,5 @@ public partial class NumbersOther
     public int CountOfFreePlaces { get; set; }
 
     public int IdClient { get; set; }
-    [JsonIgnore]
-    public virtual Client IdClientNavigation { get; set; }
+    
 }
