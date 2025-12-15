@@ -29,7 +29,6 @@
                         <Image Source="/Assets/add.png"/>
                     </Button>
                     <Button Style="{StaticResource ToolBarButtonBaseStyle}"
-                     Command="{Binding DeleteCommand}" CommandParameter="{Binding Selected}"
                     Width="30"
                     Height="30" HorizontalAlignment="Right">
                         <Image Source="/Assets/Del.png"/>

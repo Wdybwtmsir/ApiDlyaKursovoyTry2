@@ -1,0 +1,69 @@
+﻿<Window x:Class="KursClient.Views.AddEditClientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KursClient.Views"
+        mc:Ignorable="d"
+        Title="AddEditClientView" Height="420" Width="437">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0 5" Grid.Row="0" Grid.Column="0">
+            <Label Content="Введите Имя Клиента" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="FirstName" Text="{Binding FirstName}" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="1" Grid.Column="0">
+            <Label Content="Введите Фамилию" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="SurName" Text="{Binding SurName}" Grid.Row="1" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="2" Grid.Column="0">
+            <Label Content="Введите отчество" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="LastName" Text="{Binding LastName}" Grid.Row="2" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="3" Grid.Column="0" >
+            <Label Content="Введите тип документа" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="TypeOfDocument" Text="{Binding TypeOfDocument}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="4" Grid.Column="0">
+            <Label Content="Введите серию и номер паспорта" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="SerialAndNumberOfDocument" Text="{Binding SerialAndNumberOfDocument}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="0" Grid.Column="1">
+            <Label Content="Введите Дату Рождения" Margin="5 0" Foreground="Black"/>
+            <DatePicker x:Name="BirthDay" SelectedDate="{Binding BirthDay}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="1" Grid.Column="1">
+            <Label Content="Введите Пол" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="Sex" Text="{Binding Sex}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="2" Grid.Column="1">
+            <Label Content="Введите Адресс" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="HomeAddress" Text="{Binding HomeAddress}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="3" Grid.Column="1">
+            <Label Content="Введите Номер Регистрации Клиента" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="NumberOfClientRegistration" Text="{Binding NumberOfClientRegistration}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        <StackPanel Margin="0 5" Grid.Row="4" Grid.Column="1">
+            <Label Content="Введите Номер Комнаты Клиента" Margin="5 0" Foreground="Black"/>
+            <TextBox x:Name="NumberOfRoom" Text="{Binding NumberOfRoom}" Grid.Row="4" Margin="5 0"/>
+        </StackPanel>
+        
+            <Button Content="OK" Grid.Column="0" Grid.Row="5" Margin="5 0" Height="50" Click="Button_Click"
+    Style="{StaticResource DialogStyle}"/>
+            <Button Content="Cancel" Grid.Column="1" Grid.Row="5" Margin="5 0" Height="50" Click="Button_Click_1"
+    Style="{StaticResource DialogStyle}"/>
+        
+    </Grid>
+</Window>

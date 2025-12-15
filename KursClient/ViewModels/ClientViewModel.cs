@@ -57,20 +57,20 @@ namespace KursClient.ViewModels
                   {
                       try
                       {
-                          AddEditClient window = new AddEditClient(new Client());
+                          AddEditClientView window = new AddEditClientView(new Client());
                           if (window.ShowDialog() == true)
                           {
                               Client client = new Client();
-                              client.FirstName = window.Clien.FirstName;
-                              client.LastName = window.Clien.LastName;
-                              client.SurName = window.Clien.SurName;
-                              client.NumberOfClientRegistration = window.Clien.NumberOfClientRegistration;
-                              client.TypeOfDocument = window.Clien.TypeOfDocument;
-                              client.SerialAndNumberOfDocument = window.Clien.SerialAndNumberOfDocument;
-                              client.BirthDay = window.Clien.BirthDay;
-                              client.Sex = window.Clien.Sex;
-                              client.HomeAddress = window.Clien.HomeAddress;   
-                              client.NumberOfRoom = window.Clien.NumberOfRoom;
+                              client.FirstName = window.Client.FirstName;
+                              client.LastName = window.Client.LastName;
+                              client.SurName = window.Client.SurName;
+                              client.NumberOfClientRegistration = window.Client.NumberOfClientRegistration;
+                              client.TypeOfDocument = window.Client.TypeOfDocument;
+                              client.SerialAndNumberOfDocument = window.Client.SerialAndNumberOfDocument;
+                              client.BirthDay = window.Client.BirthDay;
+                              client.Sex = window.Client.Sex;
+                              client.HomeAddress = window.Client.HomeAddress;   
+                              client.NumberOfRoom = window.Client.NumberOfRoom;
                               await clientService.Add(client);
                               Load();
                           }

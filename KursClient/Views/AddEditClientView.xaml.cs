@@ -1,10 +1,10 @@
-﻿using System;
+﻿using KursClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using KursClient.Models;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -16,26 +16,26 @@ using System.Windows.Shapes;
 namespace KursClient.Views
 {
     /// <summary>
-    /// Логика взаимодействия для AddEditClient.xaml
+    /// Логика взаимодействия для AddEditClientView.xaml
     /// </summary>
-    public partial class AddEditClient : Window
+    public partial class AddEditClientView : Window
     {
-       public Client Clien { get; private set; }
-       public AddEditClient (Client _client)
+        public Client Client { get; set; }
+        public AddEditClientView(Client client)
         {
-            Clien = _client;
-            DataContext = Clien;
+            InitializeComponent();
+            Client = client;
+            DataContext = Client;
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            DialogResult=true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            DialogResult=false;
         }
     }
 }
-    
-

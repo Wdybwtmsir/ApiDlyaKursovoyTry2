@@ -5,28 +5,46 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KursClient.Services
 {
     public class NumbersOtherService : BaseService<NumbersOther>
     {
-        public override Task Add(NumbersOther obj)
+        private HttpClient httpClient;
+        public NumbersOtherService()
         {
-            throw new NotImplementedException();
+            httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Authorization",
+               "Bearer " + RegisterUser.access_token);
+        }
+        public override async Task Add(NumbersOther obj)
+        {
+            try
+            {
+                JsonContent content = JsonContent.Create(obj);
+                using var response = await httpClient.PostAsync("https://localhost:7291/API/NumbersOther", content);
+                string responseText = await response.Content.ReadAsStringAsync();
+                if (responseText != null)
+                {
+                    NumbersOther resp = JsonSerializer.Deserialize<NumbersOther>(responseText!)!;
+                    if (resp == null) MessageBox.Show(responseText);
+                }
+            }
+            catch { }
         }
 
-        public override Task Delete(NumbersOther obj)
+        public override async Task Delete(NumbersOther obj)
         {
-            throw new NotImplementedException();
+            using var response = await httpClient.DeleteAsync($"https://localhost:7291/API/NumbersOther{obj.IdNumbersOther}");
+
         }
 
         public override async Task<List<NumbersOther>> GetAll()
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Authorization",
-                "Bearer " + RegisterUser.access_token);
-            return (await httpClient.GetFromJsonAsync<List<NumbersOther>>("https://localhost:7291/api/NumbersOther"))!;
+            return (await httpClient.GetFromJsonAsync<List<NumbersOther>>("https://localhost:7291/API/NumbersOther"))!;
         }
 
 
@@ -35,9 +53,21 @@ namespace KursClient.Services
             throw new NotImplementedException();
         }
 
-        public override Task Update(NumbersOther obj)
+        public override async Task Update(NumbersOther obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                JsonContent content = JsonContent.Create(obj);
+                using var response = await httpClient.PutAsync($"https://localhost:7291/API/NumbersOther{obj.IdNumbersOther}", content);
+                string responseText = await response.Content.ReadAsStringAsync();
+                if (responseText != null)
+                {
+                    NumbersOther resp = JsonSerializer.Deserialize<NumbersOther>(responseText!)!;
+                    if (resp == null) MessageBox.Show(responseText);
+                }
+
+            }
+            catch { }
         }
     }
 }
