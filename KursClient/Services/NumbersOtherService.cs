@@ -25,7 +25,7 @@ namespace KursClient.Services
             try
             {
                 JsonContent content = JsonContent.Create(obj);
-                using var response = await httpClient.PostAsync("https://localhost:7291/API/NumbersOther", content);
+                using var response = await httpClient.PostAsync("https://localhost:7291/api/NumbersOther", content);
                 string responseText = await response.Content.ReadAsStringAsync();
                 if (responseText != null)
                 {
@@ -38,13 +38,13 @@ namespace KursClient.Services
 
         public override async Task Delete(NumbersOther obj)
         {
-            using var response = await httpClient.DeleteAsync($"https://localhost:7291/API/NumbersOther{obj.IdNumbersOther}");
+            using var response = await httpClient.DeleteAsync($"https://localhost:7291/api/NumbersOther{obj.IdNumbersOther}");
 
         }
 
         public override async Task<List<NumbersOther>> GetAll()
         {
-            return (await httpClient.GetFromJsonAsync<List<NumbersOther>>("https://localhost:7291/API/NumbersOther"))!;
+            return (await httpClient.GetFromJsonAsync<List<NumbersOther>>("https://localhost:7291/api/NumbersOther"))!;
         }
 
 

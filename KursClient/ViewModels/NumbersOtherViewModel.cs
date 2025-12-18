@@ -70,6 +70,7 @@ namespace KursClient.ViewModels
                               numbersOther.CountOfFreePlaces = window.NumbersOth.CountOfFreePlaces;
                               numbersOther.IdClient = window.NumbersOth.IdClient;
                               await numbersOtherService.Add(numbersOther);
+
                               Load();
                           }
                       } 

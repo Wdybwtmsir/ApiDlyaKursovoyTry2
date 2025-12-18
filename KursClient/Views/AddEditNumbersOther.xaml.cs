@@ -30,6 +30,7 @@ namespace KursClient.Views
         public NumbersOther NumbersOth { get; private set; }
         public AddEditNumbersOther(NumbersOther _numbersOther)
         {
+            InitializeComponent();
             NumbersOth = _numbersOther;
             DataContext = NumbersOth;
             _clientService = new ClientService();

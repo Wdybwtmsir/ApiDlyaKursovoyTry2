@@ -40,7 +40,7 @@
         </StackPanel>
         <StackPanel Margin="0 5" Grid.Row="0" Grid.Column="1">
             <Label Content="Введите Стоимость В день" Margin="5 0" Foreground="Black"/>
-            <DatePicker x:Name="CostPerDay" SelectedDate="{Binding CostPerDay}" Grid.Row="0" Grid.Column="1" Margin="5 0"/>
+            <TextBox x:Name="CostPerDay" Text="{Binding CostPerDay}" Grid.Row="0" Grid.Column="1" Margin="5 0"/>
         </StackPanel>
         <StackPanel Margin="0 5" Grid.Row="1" Grid.Column="1">
             <Label Content="Введите Количество свободных мест" Margin="5 0" Foreground="Black"/>

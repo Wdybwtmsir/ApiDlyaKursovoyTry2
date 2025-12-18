@@ -24,5 +24,5 @@ public partial class NumbersOther
 
     public int IdClient { get; set; }
     [JsonIgnore]
-    public virtual Client IdClientNavigation { get; set; }
+    public virtual Client? IdClientNavigation { get; set; }
 }
