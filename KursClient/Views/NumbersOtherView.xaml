@@ -4,9 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KursClient.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+            xmlns:vm="clr-namespace:KursClient.ViewModels"
+            xmlns:Menu="clr-namespace:KursClient.Utils"
+            xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+            mc:Ignorable="d" 
+            d:DesignHeight="500" d:DesignWidth="900"
+            xmlns:sys="clr-namespace:System;assembly=mscorlib"
+            Style="{StaticResource Page_Style}">
+    <UserControl.DataContext>
+        <vm:NumbersOtherViewModel/>
+    </UserControl.DataContext>
     <Grid>
-            
+        <Border CornerRadius="0,20,20,0" Margin="0,5,5,0">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{Binding AddCommand}" Width="30"
+                        Height="30" HorizontalAlignment="Right">
+                        <Image Source="/Assets/add.png"/>
+                    </Button>
+                    <Button Style="{StaticResource ToolBarButtonBaseStyle}"
+                    Width="30"
+                    Height="30" HorizontalAlignment="Right">
+                        <Image Source="/Assets/Del.png"/>
+                    </Button>
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding NumbersOtherList}"
+                      AutoGenerateColumns="False"
+                      Grid.Row="1" IsReadOnly="True"
+                      SelectedItem="{Binding Selected}" FontSize="14">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction
+                            Command="{Binding EditCommand}"
+                            CommandParameter="{Binding Selected}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Изменить" 
+                                  Command="{Binding EditCommand}"
+                                  CommandParameter="{Binding Selected}"/>
+                            <MenuItem Header="Удалить" 
+                                  Command="{Binding DeleteCommand}"
+                                  CommandParameter="{Binding Selected}"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="НомерКомнаты" Width="Auto" Binding="{Binding NumberOfRoom }"/>
+                        <DataGridTextColumn Header="ТипНомера" Width="Auto" Binding="{Binding TypeOfNumber}"/>
+                        <DataGridTextColumn Header="КоличествоМест" Width="Auto" Binding="{Binding CountOfMest}"/>
+                        <DataGridTextColumn Header="Этаж" Width="Auto" Binding="{Binding Floor}"/>
+                        <DataGridTextColumn Header="НомерТелефона" Width="Auto" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="СтоимостьВДень" Width="Auto" Binding="{Binding CostPerDay}"/>
+                        <DataGridTextColumn Header="КоличествоСвободныхМест" Width="Auto" Binding="{Binding CountOfFreePlaces}"/>
+                        <DataGridTextColumn Header="Клиент" Width="Auto" Binding="{Binding IdClient}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

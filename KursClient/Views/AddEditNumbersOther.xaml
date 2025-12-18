@@ -47,7 +47,7 @@
             <TextBox x:Name="CountOfFreePlaces" Text="{Binding CountOfFreePlaces}" Grid.Row="1" Grid.Column="1" Margin="5 0"/>
         </StackPanel>
         <StackPanel Margin="0 5" Grid.Row="2" Grid.Column="1">
-            <Label Content="Введите Клиента" Margin="5 0" Foreground="Black"/>
+            <Label Content="Выберите Клиента" Margin="5 0" Foreground="Black"/>
             <ComboBox ItemsSource="{Binding ClientList}" Grid.Row="2" Grid.Column="1" DisplayMemberPath="FirstName" SelectedValuePath="IdClient"
                       x:Name="ClientList" SelectedValue="{Binding IdClient}"/>
         </StackPanel>
