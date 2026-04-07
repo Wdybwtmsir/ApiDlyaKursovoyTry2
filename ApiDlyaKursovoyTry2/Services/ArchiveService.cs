@@ -15,6 +15,11 @@ public class ArchiveService : IService<Archive>
     {
         return await db.Archives.FindAsync(id);
     }
+
+    public async Task<IEnumerable<Archive>> GetByName(string name)
+    {
+        return await db.Archives.Where(p=>p.FirstName!.Contains(name)).ToListAsync();
+    }
     public async Task Create(Archive entity)
     {
         db.Archives.Add(entity);

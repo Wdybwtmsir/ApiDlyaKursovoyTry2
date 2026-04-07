@@ -5,10 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.Extensions.Caching.Memory;
 using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(
+
+new MemoryCacheOptions
+
+{
+
+    TrackStatistics = true,
+
+    SizeLimit = 50 
+
+}));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
