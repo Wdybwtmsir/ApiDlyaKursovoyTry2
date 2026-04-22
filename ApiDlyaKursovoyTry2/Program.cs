@@ -10,6 +10,8 @@ using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddResponseCaching();
 builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(
 
 new MemoryCacheOptions
@@ -59,6 +61,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseResponseCaching();
 app.MapPost("/login", async (Admin user, NormalnayaKursovayaContext db) =>
 {
     Admin? admin = await db.Admins!.FirstOrDefaultAsync(p => p.Email == user.Email);

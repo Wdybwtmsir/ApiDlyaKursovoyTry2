@@ -1,0 +1,68 @@
+﻿@using ApiDlyaKursovoyTry2.Models
+@model Northwind.WebApi.Client.Mvc.Models.HomeProductsViewModel
+@{
+    ViewData["Title"] = "Archives using Polly";
+}
+<div class="text-center">
+ <h1 class="display-4">@ViewData["Title"]</h1>
+ <div class="alert alert-info">
+ <p>
+ This page calls a web service endpoint that will randomly
+ fail two out of three times. It will use Polly to retry
+ the call automatically.
+ </p>
+ </div>
+ @if (Model is not null)
+ {
+ if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+ {
+ <div class="alert alert-danger">
+ @Model.ErrorMessage
+ </div>
+ }
+ <form action="/home/archives">
+ <input name="name" placeholder="Enter part of a product name"
+ value="@Model.NameContains" />
+ <input type="submit" value="Получить Архив" />
+ @if (!string.IsNullOrWhiteSpace(Model.NameContains))
+ {
+ <p>
+ Searched for product names that start with:
+ <span class="badge bg-primary rounded-pill">
+ @Model.NameContains</span>
+ </p>
+ }
+ </form>
+ <div>
+ @if (Model.Archives is not null)
+ {
+ <table class="table">
+ <thead>
+ <tr>
+ <th scope="col">Archive Name</th>
+ </tr>
+ </thead>
+ <tbody>
+ @if (Model.Archives.Any())
+ {
+ @foreach (Archive p in Model.Archives)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@(Model.BaseAddress)api/archives/@p.IdArchive">
+                                            @p.FirstName
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>0 products found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    }
+</div>

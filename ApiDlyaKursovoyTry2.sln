@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDlyaKursovoyTry2", "ApiD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KursClient", "KursClient\KursClient.csproj", "{6317C624-BC83-4653-8056-4FB1A58ACBC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northwind.WebApi.Client.Mvc", "Northwind.WebApi.Client.Mvc\Northwind.WebApi.Client.Mvc.csproj", "{45E07B36-A983-4E72-838B-EBFF6AFBC7DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6317C624-BC83-4653-8056-4FB1A58ACBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6317C624-BC83-4653-8056-4FB1A58ACBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6317C624-BC83-4653-8056-4FB1A58ACBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E07B36-A983-4E72-838B-EBFF6AFBC7DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E07B36-A983-4E72-838B-EBFF6AFBC7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E07B36-A983-4E72-838B-EBFF6AFBC7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E07B36-A983-4E72-838B-EBFF6AFBC7DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

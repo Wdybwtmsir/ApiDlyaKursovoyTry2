@@ -4,7 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIdlyaKursovoy.Controllers
 {
@@ -17,6 +20,62 @@ namespace APIdlyaKursovoy.Controllers
         private readonly ArchiveService archService;
         private readonly IMemoryCache _memoryCache;
         private const string OutOfStockProductsKey = "OOSP";
+        private readonly IDistributedCache _distributedCache;
+        private const string ArchiveByAddress = "DISCP";
+        private readonly NormalnayaKursovayaContext _db;
+        private readonly ILogger<ArchiveController> _logger;
+        public ArchiveController(ILogger<ArchiveController> logger,
+                            NormalnayaKursovayaContext context,
+                                        IMemoryCache memoryCache,
+                                IDistributedCache distributedCache)
+        {
+            _logger = logger;
+            _db = context;
+            _memoryCache = memoryCache;
+            _distributedCache = distributedCache;
+        }
+
+        private Archive[]? GetArchiveByAddressFromDataBase(string address)
+        {
+            Archive[]? cachedValue = _db.Archives.Where(p => p.HomeAddress == address).ToArray();                    
+            DistributedCacheEntryOptions cacheEntryOptions = new()
+            {
+                SlidingExpiration = TimeSpan.FromSeconds(5),
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(20),
+            };
+            byte[]? cachedValueBytes =
+            JsonSerializer.SerializeToUtf8Bytes(cachedValue);
+
+            _distributedCache.Set(ArchiveByAddress,
+            cachedValueBytes, cacheEntryOptions);
+
+            return cachedValue;
+        }
+
+        [HttpGet]
+        [Route("byaddress")]
+        [Produces(typeof(Archive[]))]
+        public IEnumerable<Archive> GetArchiveByAddress(string address)
+        {
+            
+            byte[]? cachedValueBytes = _distributedCache.Get(ArchiveByAddress);
+            Archive[]? cachedValue = null;
+            if (cachedValueBytes is null)
+            {
+                cachedValue = GetArchiveByAddressFromDataBase(address);
+            }
+            else
+            {
+                cachedValue = JsonSerializer.Deserialize<Archive[]?>(cachedValueBytes);
+                if (cachedValue is null)
+                {
+                    cachedValue =  GetArchiveByAddressFromDataBase(address);
+                }
+            }
+            return cachedValue ?? Enumerable.Empty<Archive>();
+        }
+
+
 
         public ArchiveController(ArchiveService service, IMemoryCache memoryCache)
         {
@@ -48,19 +107,6 @@ namespace APIdlyaKursovoy.Controllers
         }
 
 
-
-        [HttpGet("{id}")]
-        [ResponseCache(Duration = 5, 
-        Location = ResponseCacheLocation.Any, 
-        VaryByHeader = "User-Agent" 
-        )]
-        public async Task<ActionResult<Archive>> GetArchiveById(int id)
-        {
-            var arch = await archService.GetById(id);
-            if (arch == null) return NotFound();
-            return Ok(arch);
-        }
-
         [HttpGet("{name}")]
 
         public async Task<IEnumerable<Archive>> GetByName(string name)
@@ -71,6 +117,19 @@ namespace APIdlyaKursovoy.Controllers
                 return await archService.GetByName(name);
             }
             throw new Exception("Randomized fault.");
+        }
+
+
+
+
+        [HttpGet("{id:int}")]
+        [ResponseCache(Duration = 5,
+         Location = ResponseCacheLocation.Any,
+         VaryByHeader = "User-Agent"
+         )]
+        public async ValueTask<Archive?> GetArchiveById(int id)
+        {
+            return await _db.Archives.FindAsync(id);
         }
 
         [HttpPost]
